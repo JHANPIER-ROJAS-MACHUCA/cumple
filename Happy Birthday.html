@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>🎂 Feliz Cumpleaños 🎉</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="Happy%20Birthday_files/bootstrap.css">
+    <link rel="stylesheet" href="Happy%20Birthday_files/style.css">
+
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            font-family: "Comic Sans MS", cursive, sans-serif;
+            overflow-x: hidden;
+        }
+
+        #name {
+            font-size: 3rem;
+            color: #ff4081;
+            text-shadow: 2px 2px 5px #000;
+        }
+
+        .cake img {
+            max-width: 200px;
+            animation: bounce 2s infinite;
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -150px;
+            font-size: 3rem;
+            animation: float 8s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-120vh) rotate(360deg);
+            }
+        }
+
+        @keyframes bounce {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="loader text-center mt-5" style="display: none;">
+                <button id="play" class="btn btn-lg btn-primary">
+                    <i class="fa-solid fa-play"></i> Iniciar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Música -->
+    <audio class="song" controls loop>
+        <source src="Happy%20Birthday_files/music.mp3" type="audio/mpeg">
+        Tu navegador no admite la reproducción de audio.
+    </audio>
+
+    <!-- Confeti -->
+    <canvas id="confetti"></canvas>
+
+    <div class="container pt-5">
+        <div class="row">
+            <!-- Banner -->
+            <div class="col-12 col-xl-6 mx-auto text-center">
+                <img src="Happy%20Birthday_files/banner.png" alt="Banner de cumpleaños" class="img-fluid">
+            </div>
+
+            <!-- Nombre -->
+            <div class="col-12 text-center mt-3">
+                <div id="name" class="area fw-bold">🎉 LICHI 🎉</div>
+            </div>
+
+            <!-- Mensaje animado -->
+            <div class="col-12 text-center mt-3">
+                <div class="type-wrap">
+                    <div id="typed-strings" class="typing" style="display: none;">
+                        <h2><i class="fa-solid fa-gift text-danger"></i> 🎂 ¡Feliz Cumpleaños <i id="nae">LICHI</i>! 🎉</h2>
+                        <h2><i class="fa-solid fa-star text-warning"></i> ✨ Que tengas un día maravilloso ✨</h2>
+                        <h2><i class="fa-solid fa-champagne-glasses text-success"></i> 😊 Lleno de alegría y felicidad 🎈</h2>
+                    </div>
+                    <span id="typed" style="white-space:pre;"></span>
+                    <span class="typed-cursor">|</span>
+                </div>
+            </div>
+
+            <!-- Pastel -->
+            <div class="col-12 col-xl-6 mx-auto cake text-center mt-4">
+                <img src="Happy%20Birthday_files/cake.svg" alt="Pastel de cumpleaños">
+                <h4 class="mt-2">🎂 Sopla las velas 🎂</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bordes de globos -->
+    <img src="Happy%20Birthday_files/Balloon-Border.png" class="balloon-border" width="100%">
+
+    <!-- Globos flotando -->
+    <div id="balloons"></div>
+
+    <!-- Scripts -->
+    <script src="Happy%20Birthday_files/snowflakes.js"></script>
+    <script src="Happy%20Birthday_files/jquery.js"></script>
+    <script src="Happy%20Birthday_files/typed.js"></script>
+    <script src="Happy%20Birthday_files/script.js"></script>
+
+    <!-- Configuración de Typed.js y globos -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            new Typed("#typed", {
+                stringsElement: "#typed-strings",
+                typeSpeed: 60,
+                backSpeed: 40,
+                backDelay: 1500,
+                startDelay: 500,
+                loop: true,
+                showCursor: true,
+                cursorChar: "|"
+            });
+        });
+
+        // Globos flotando 🎈
+        const balloonContainer = document.getElementById("balloons");
+        const colors = ["🎈", "🎉", "🎊"];
+
+        function createBalloon() {
+            const balloon = document.createElement("div");
+            balloon.classList.add("balloon");
+            balloon.style.left = Math.random() * 100 + "vw";
+            balloon.style.animationDuration = (6 + Math.random() * 4) + "s";
+            balloon.innerHTML = colors[Math.floor(Math.random() * colors.length)];
+            balloonContainer.appendChild(balloon);
+
+            setTimeout(() => {
+                balloon.remove();
+            }, 10000);
+        }
+
+        setInterval(createBalloon, 1000);
+    </script>
+</body>
+
+</html>
